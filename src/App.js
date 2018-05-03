@@ -66,12 +66,16 @@ class App extends Component {
             ", ",
             value1.newKey ? value1.newKey : "not yet"
           ]}
+          {store1.arr && store1.arr[0] && store1.arr[0].msg ? (
+            <span style={{ color: "blue" }}> {store1.arr[0].msg} </span>
+          ) : null}
         </Headline>
         <JSONPretty json={store1} />
         <button
           onClick={() => {
             store1.value1 = { text: "first clicked", newKey: "added key" };
-            console.log(toJS(value1));
+            store1.arr = [{ msg: "blue" }];
+            console.log(toJS(store1.value1));
           }}
         />
       </div>
