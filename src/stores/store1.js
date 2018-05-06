@@ -1,10 +1,17 @@
 import { observable, action, toJS, autorun } from "mobx";
+import { extendObservable } from "mobx";
 
 class store1 {
-  @observable value1 = { text: "first" };
-  @observable arrayTest = [];
-  @action("pushed to arrayTest")
-  pushArrayTest = obj => this.arrayTest.push(obj);
+  @observable myObj = {};
+  // @action("add property to myObj")
+  // addStuff = stuff => {
+  //   this.myObj.newlyAdded = stuff;
+  // };
+  @action("add property to myObj with extendObservable")
+  addStuff = stuff => {
+    extendObservable(this.myObj, { newlyAdded: stuff });
+    // this.myObj.newlyAdded = stuff;
+  };
 }
 
 const newStore1 = new store1();

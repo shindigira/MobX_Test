@@ -54,12 +54,12 @@ class App extends Component {
   render() {
     console.log("App Render", this.props);
     const { store1, store2 } = this.props;
-    const { value1 } = store1;
-    const { value2 } = store2;
+    // const { value1 } = store1;
+    // const { value2 } = store2;
     console.log(toJS(store1));
     return (
       <div className="App">
-        <Headline theme={"day"}>
+        {/* <Headline theme={"day"}>
           {[
             value1.text,
             ", ",
@@ -70,34 +70,14 @@ class App extends Component {
           {store1.arr && store1.arr[0] && store1.arr[0].msg ? (
             <span style={{ color: "blue" }}> {store1.arr[0].msg} </span>
           ) : null}
-        </Headline>
+        </Headline> */}
         <JSONPretty json={store1} />
         <button
           onClick={() => {
-            // store1.value1 = { text: "first clicked", newKey: "added key" };
-            store1.value1.text = "first clicked";
-            store1.value1.newKey = "added key";
-            store1.value1.arr = [{ msg: "blue" }];
+            this.props.store1.addStuff([{ added: true }]);
           }}
         >
-          first button
-        </button>
-        <button
-          onClick={() => {
-            // store1.value1.text = "second clicked";
-            // store1.value1.newKey = "changed key";
-            store1.value1.arr = [{ msg: "red" }];
-            console.log("second button clicked", store1.value1);
-          }}
-        >
-          second button
-        </button>
-        <button
-          onClick={() => {
-            store1.pushArrayTest({ push: "pushed" });
-          }}
-        >
-          third button
+          Click Me
         </button>
       </div>
     );
