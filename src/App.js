@@ -52,10 +52,11 @@ const Headline = styled.h1`
 @observer
 class App extends Component {
   render() {
-    console.log("App Render");
+    console.log("App Render", this.props);
     const { store1, store2 } = this.props;
     const { value1 } = store1;
     const { value2 } = store2;
+    console.log(toJS(store1));
     return (
       <div className="App">
         <Headline theme={"day"}>
@@ -73,11 +74,31 @@ class App extends Component {
         <JSONPretty json={store1} />
         <button
           onClick={() => {
-            store1.value1 = { text: "first clicked", newKey: "added key" };
-            store1.arr = [{ msg: "blue" }];
-            console.log(toJS(store1.value1));
+            // store1.value1 = { text: "first clicked", newKey: "added key" };
+            store1.value1.text = "first clicked";
+            store1.value1.newKey = "added key";
+            store1.value1.arr = [{ msg: "blue" }];
           }}
-        />
+        >
+          first button
+        </button>
+        <button
+          onClick={() => {
+            // store1.value1.text = "second clicked";
+            // store1.value1.newKey = "changed key";
+            store1.value1.arr = [{ msg: "red" }];
+            console.log("second button clicked", store1.value1);
+          }}
+        >
+          second button
+        </button>
+        <button
+          onClick={() => {
+            store1.pushArrayTest({ push: "pushed" });
+          }}
+        >
+          third button
+        </button>
       </div>
     );
   }
