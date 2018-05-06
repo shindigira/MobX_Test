@@ -9,8 +9,11 @@ class store1 {
   // };
   @action("add property to myObj with extendObservable")
   addStuff = stuff => {
-    extendObservable(this.myObj, { newlyAdded: stuff });
-    // this.myObj.newlyAdded = stuff;
+    if (!this.myObj.hasOwnProperty("newlyAdded")) {
+      extendObservable(this.myObj, { newlyAdded: stuff });
+    } else {
+      this.myObj.newlyAdded = stuff;
+    }
   };
 }
 
